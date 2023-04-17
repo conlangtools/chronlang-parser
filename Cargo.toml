@@ -1,0 +1,13 @@
+[package]
+name = "chronlang-parser"
+version = "0.1.0"
+description = "A parser for Chronlang, a computer language for crafting constructed languages."
+license = "MIT"
+homepage = "https://conlang.tools/"
+repository = "https://github.com/conlangtools/chronlang-parser"
+
+edition = "2021"
+
+[dependencies]
+ariadne = "0.2.0"
+chumsky = "0.9.2"
