@@ -6,7 +6,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
 
   let id = ident();
 
-  let parent = just("<-")
+  let parent = just("<")
     .padded()
     .ignore_then(ident())
     .or_not();
@@ -39,7 +39,7 @@ mod test {
 
   #[test]
   fn it_parses_a_language_with_a_parent() {
-    let src = "lang OA <- PA";
+    let src = "lang OA < PA";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(Stmt::Language { id: "OA".to_string(), parent: Some("PA".to_string()), name: None })
@@ -57,7 +57,7 @@ mod test {
 
   #[test]
   fn it_parses_a_language_with_a_parent_and_a_name() {
-    let src = "lang OA <- PA: Old A";
+    let src = "lang OA < PA: Old A";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(Stmt::Language { id: "OA".to_string(), parent: Some("PA".to_string()), name: Some("Old A".to_string()) })

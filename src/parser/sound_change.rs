@@ -78,7 +78,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
   let source = source();
 
   let target =
-    just("->")
+    just(">")
     .padded()
     .ignore_then(target());
 
@@ -113,14 +113,14 @@ mod test {
 
   #[test]
   fn it_parses_a_sound_change() {
-    let src = "$ ɢ -> g";
+    let src = "$ ɢ > g";
     let res = parser().parse(src.to_string());
     assert_eq!(
       res,
       Ok(
         Stmt::SoundChange {
           source: (2..3, Source::Pattern(vec![Segment::Phonemes("ɢ".into())])),
-          target: (7..8, Target::Pattern(vec![Segment::Phonemes("g".into())])),
+          target: (6..7, Target::Pattern(vec![Segment::Phonemes("g".into())])),
           environment: None,
           description: None,
         }
@@ -130,13 +130,13 @@ mod test {
 
   #[test]
   fn it_parses_a_sound_change_with_an_environment() {
-    let src = "$ k -> c / _[V+close]";
+    let src = "$ k > c / _[V+close]";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(
         Stmt::SoundChange {
           source: (2..3, Source::Pattern(vec![Segment::Phonemes("k".into())])),
-          target: (7..8, Target::Pattern(vec![Segment::Phonemes("c".into())])),
+          target: (6..7, Target::Pattern(vec![Segment::Phonemes("c".into())])),
           environment: Some(Environment {
             before: None,
             after: Some(vec![
@@ -154,13 +154,13 @@ mod test {
 
   #[test]
   fn it_parses_a_sound_change_with_an_environment_and_description() {
-    let src = "$ k -> c / #_i : Word-initial k lenites to c before i";
+    let src = "$ k > c / #_i : Word-initial k lenites to c before i";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(
         Stmt::SoundChange {
           source: (2..3, Source::Pattern(vec![Segment::Phonemes("k".into())])),
-          target: (7..8, Target::Pattern(vec![Segment::Phonemes("c".into())])),
+          target: (6..7, Target::Pattern(vec![Segment::Phonemes("c".into())])),
           environment: Some(Environment {
             before: Some(vec![EnvElement::WordBoundary]),
             after: Some(vec![EnvElement::Segment(Segment::Phonemes("i".into()))])
@@ -173,7 +173,7 @@ mod test {
 
   #[test]
   fn it_parses_a_sound_change_with_categories_and_modifications() {
-    let src = "$ [C+stop+alveolar] -> [+flap]";
+    let src = "$ [C+stop+alveolar] > [+flap]";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(
@@ -186,7 +186,7 @@ mod test {
             })])
           ),
           target: (
-            23..30,
+            22..29,
             Target::Modification(vec![Feature::Positive("flap".to_string())])
           ),
           environment: None,
@@ -198,13 +198,13 @@ mod test {
 
   #[test]
   fn it_parses_a_sound_change_with_empty_source_or_target() {
-    let src = "$ [] -> []";
+    let src = "$ [] > []";
     assert_eq!(
       parser().parse(src.to_string()),
       Ok(
         Stmt::SoundChange {
           source: (2..4, Source::Empty),
-          target: (8..10, Target::Empty),
+          target: (7..9, Target::Empty),
           environment: None,
           description: None,
         }
@@ -214,7 +214,7 @@ mod test {
 
   #[test]
   fn it_does_not_parse_a_sound_change_with_no_source() {
-    let src = "$  -> [] / _";
+    let src = "$  > [] / _";
     let res= parser().parse(src.to_string());
     
     assert!(res.is_err());
@@ -222,7 +222,7 @@ mod test {
 
   #[test]
   fn it_does_not_parse_a_sound_change_with_no_target() {
-    let src = "$ [] -> / _";
+    let src = "$ [] > / _";
     let res= parser().parse(src.to_string());
     
     assert!(res.is_err());

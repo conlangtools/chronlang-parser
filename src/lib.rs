@@ -60,8 +60,8 @@ mod test {
         import * from @core/ipa
 
         lang OEng : Old English
-        lang OEng <- AmEng : American English
-        lang OEng <- RP : Received Pronunciation
+        lang OEng < AmEng : American English
+        lang OEng < RP : Received Pronunciation
         
         @ 1000, OEng
         
@@ -72,7 +72,7 @@ mod test {
         
         @ 1940, AmEng
         
-        $ [C+alveolar+stop] -> [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
+        $ [C+alveolar+stop] > [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
       ").is_ok()
     )
   }
