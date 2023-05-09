@@ -18,10 +18,12 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
 
   let notation = just("=")
     .padded()
-    .ignore_then(sequence())
-    .then_ignore(just("_"))
-    .then(sequence())
-    .map(|(before, after)| before + "_" + &after)
+    .ignore_then(
+      sequence()
+        .then_ignore(just("_"))
+        .then(sequence())
+        .map_with_span(|(before, after), span| (span, before + "_" + &after))
+    )
     .or_not();
 
   let member = just("default")
@@ -30,6 +32,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .map(|d| d.is_some())
     .then(
       ident()
+        .map_with_span(|id, span| (span, id))
         .separated_by(just("|").padded())
         .at_least(1)
     )
@@ -44,7 +47,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .delimited_by(just("{").padded(), just("}"));
 
   start
-    .ignore_then(ident())
+    .ignore_then(ident().map_with_span(|id, span| (span, id)))
     .then(body)
     .map(|(label, members)| Stmt::Trait { label, members })
 }
@@ -66,11 +69,11 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Trait {
-          label: "Place".into(),
+          label: (13..18, "Place".into()),
           members: vec![
-            TraitMember { labels: vec!["labial".into()], notation: None, default: false },
-            TraitMember { labels: vec!["alveolar".into()], notation: None, default: false },
-            TraitMember { labels: vec!["velar".into()], notation: None, default: false },
+            TraitMember { labels: vec![(29..35, "labial".into())], notation: None, default: false },
+            TraitMember { labels: vec![(45..53, "alveolar".into())], notation: None, default: false },
+            TraitMember { labels: vec![(63..68, "velar".into())], notation: None, default: false },
           ],
         },
       )
@@ -89,10 +92,10 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Trait {
-          label: "Stress".into(),
+          label: (13..19, "Stress".into()),
           members: vec![
-            TraitMember { labels: vec!["primary".into()], notation: Some("ˈ_".into()), default: false },
-            TraitMember { labels: vec!["secondary".into()], notation: Some("ˌ_".into()), default: false },
+            TraitMember { labels: vec![(30..37, "primary".into())], notation: Some((40..42, "ˈ_".into())), default: false },
+            TraitMember { labels: vec![(52..61, "secondary".into())], notation: Some((64..66, "ˌ_".into())), default: false },
           ],
         },
       )
@@ -112,11 +115,11 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Trait {
-          label: "Length".into(),
+          label: (13..19, "Length".into()),
           members: vec![
-            TraitMember { labels: vec!["short".into()], notation: None, default: true },
-            TraitMember { labels: vec!["long".into()], notation: Some("_:".into()), default: false },
-            TraitMember { labels: vec!["overlong".into()], notation: Some("_::".into()), default: false },
+            TraitMember { labels: vec![(38..43, "short".into())], notation: None, default: true },
+            TraitMember { labels: vec![(53..57, "long".into())], notation: Some((60..62, "_:".into())), default: false },
+            TraitMember { labels: vec![(72..80, "overlong".into())], notation: Some((83..86, "_::".into())), default: false },
           ],
         },
       )

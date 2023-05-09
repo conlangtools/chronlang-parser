@@ -8,8 +8,8 @@ pub enum Stmt {
   SoundChange {
     source: Spanned<Source>,
     target: Spanned<Target>,
-    environment: Option<Environment>,
-    description: Option<String>,
+    environment: Option<Spanned<Environment>>,
+    description: Option<Spanned<String>>,
   },
   Import {
     path: Vec<Spanned<String>>,
@@ -17,21 +17,21 @@ pub enum Stmt {
     names: Vec<Spanned<String>>,
   },
   Language {
-    id: String,
-    parent: Option<String>,
-    name: Option<String>,
+    id: Spanned<String>,
+    parent: Option<Spanned<String>>,
+    name: Option<Spanned<String>>,
   },
   Word {
-    gloss: String,
-    pronunciation: Vec<String>,
+    gloss: Spanned<String>,
+    pronunciation: Spanned<Vec<String>>,
     definitions: Vec<Definition>,
   },
   Class {
-    label: String,
+    label: Spanned<String>,
     class: Class,
   },
   Trait {
-    label: String,
+    label: Spanned<String>,
     members: Vec<TraitMember>,
   },
   Milestone {
@@ -91,15 +91,15 @@ pub enum EnvElement {
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Definition {
-  pub pos: Option<String>,
-  pub definition: String,
+  pub pos: Option<Spanned<String>>,
+  pub definition: Spanned<String>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Class {
   Full {
-    encodes: Vec<String>,
-    annotates: Vec<String>,
+    encodes: Vec<Spanned<String>>,
+    annotates: Vec<Spanned<String>>,
     phonemes: Vec<PhonemeDef>,
   },
   Category(Category),
@@ -108,14 +108,14 @@ pub enum Class {
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct PhonemeDef {
-  pub label: String,
-  pub traits: Vec<String>,
+  pub label: Spanned<String>,
+  pub traits: Vec<Spanned<String>>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct TraitMember {
-  pub labels: Vec<String>,
-  pub notation: Option<String>,
+  pub labels: Vec<Spanned<String>>,
+  pub notation: Option<Spanned<String>>,
   pub default: bool,
 }
 
