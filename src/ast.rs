@@ -11,7 +11,11 @@ pub enum Stmt {
     environment: Option<Environment>,
     description: Option<String>,
   },
-  Import(Vec<Spanned<String>>),
+  Import {
+    path: Vec<Spanned<String>>,
+    absolute: bool,
+    names: Vec<Spanned<String>>,
+  },
   Language {
     id: String,
     parent: Option<String>,
