@@ -30,7 +30,8 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .map(|d| d.is_some())
     .then(
       ident()
-      .separated_by(just("|").padded())
+        .separated_by(just("|").padded())
+        .at_least(1)
     )
     .then(notation)
     .map(|((default, labels), notation)| TraitMember { default, labels, notation });
@@ -46,4 +47,79 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .ignore_then(ident())
     .then(body)
     .map(|(label, members)| Stmt::Trait { label, members })
+}
+
+#[cfg(test)]
+mod test {
+  use super::*;
+
+  #[test]
+  fn it_parses_a_trait() {
+    let src = "
+      trait Place {
+        labial,
+        alveolar,
+        velar,
+      }
+    ";
+    assert_eq!(
+      parser().parse(src.to_string()),
+      Ok(
+        Stmt::Trait {
+          label: "Place".into(),
+          members: vec![
+            TraitMember { labels: vec!["labial".into()], notation: None, default: false },
+            TraitMember { labels: vec!["alveolar".into()], notation: None, default: false },
+            TraitMember { labels: vec!["velar".into()], notation: None, default: false },
+          ],
+        },
+      )
+    )
+  }
+
+  #[test]
+  fn it_parses_a_trait_with_annotations() {
+    let src = "
+      trait Stress {
+        primary = ˈ_,
+        secondary = ˌ_,
+      }
+    ";
+    assert_eq!(
+      parser().parse(src.to_string()),
+      Ok(
+        Stmt::Trait {
+          label: "Stress".into(),
+          members: vec![
+            TraitMember { labels: vec!["primary".into()], notation: Some("ˈ_".into()), default: false },
+            TraitMember { labels: vec!["secondary".into()], notation: Some("ˌ_".into()), default: false },
+          ],
+        },
+      )
+    )
+  }
+
+  #[test]
+  fn it_parses_a_trait_with_a_default() {
+    let src = "
+      trait Length {
+        default short,
+        long = _:,
+        overlong = _::,
+      }
+    ";
+    assert_eq!(
+      parser().parse(src.to_string()),
+      Ok(
+        Stmt::Trait {
+          label: "Length".into(),
+          members: vec![
+            TraitMember { labels: vec!["short".into()], notation: None, default: true },
+            TraitMember { labels: vec!["long".into()], notation: Some("_:".into()), default: false },
+            TraitMember { labels: vec!["overlong".into()], notation: Some("_::".into()), default: false },
+          ],
+        },
+      )
+    )
+  }
 }

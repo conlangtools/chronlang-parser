@@ -48,7 +48,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
 }
 
 #[cfg(test)]
-mod test{
+mod test {
   use super::*;
 
   #[test]
