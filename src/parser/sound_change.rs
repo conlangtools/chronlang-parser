@@ -65,11 +65,11 @@ fn env_pattern() -> impl Parser<char, EnvPattern, Error = Simple<char>> {
     .repeated().at_least(1)
 }
 
-fn environment() -> impl Parser<char, Environment, Error = Simple<char>> {
+fn environment() -> impl Parser<char, Spanned<Environment>, Error = Simple<char>> {
   env_pattern().or_not()
     .then_ignore(just("_"))
     .then(env_pattern().or_not())
-    .map(|(before, after)| Environment { before, after })
+    .map_with_span(|(before, after), span| (span, Environment { before, after }))
 }
 
 pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
@@ -91,7 +91,10 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
   let description =
     just(":")
     .padded()
-    .ignore_then(description())
+    .ignore_then(
+      description()
+        .map_with_span(|desc, span| (span, desc))
+    )
     .or_not();
 
   start
@@ -137,7 +140,7 @@ mod test {
         Stmt::SoundChange {
           source: (2..3, Source::Pattern(vec![Segment::Phonemes("k".into())])),
           target: (6..7, Target::Pattern(vec![Segment::Phonemes("c".into())])),
-          environment: Some(Environment {
+          environment: Some((10..20, Environment {
             before: None,
             after: Some(vec![
               EnvElement::Segment(Segment::Category(Category {
@@ -145,7 +148,7 @@ mod test {
                 features: vec![Feature::Positive("close".to_string())]
               }))
             ])
-          }),
+          })),
           description: None,
         }
       )
@@ -161,11 +164,11 @@ mod test {
         Stmt::SoundChange {
           source: (2..3, Source::Pattern(vec![Segment::Phonemes("k".into())])),
           target: (6..7, Target::Pattern(vec![Segment::Phonemes("c".into())])),
-          environment: Some(Environment {
+          environment: Some((10..13, Environment {
             before: Some(vec![EnvElement::WordBoundary]),
             after: Some(vec![EnvElement::Segment(Segment::Phonemes("i".into()))])
-          }),
-          description: Some("Word-initial k lenites to c before i".to_string()),
+          })),
+          description: Some((16..52, "Word-initial k lenites to c before i".to_string())),
         }
       )
     )

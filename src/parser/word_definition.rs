@@ -8,11 +8,15 @@ use crate::ast::{
 
 fn definition() -> impl Parser<char, Definition, Error = Simple<char>> {
   ident()
+    .map_with_span(|pos, span| (span, pos))
     .then_ignore(just("."))
     .padded()
     .or_not()
-    .then(description())
-    .map(|(pos, definition)| Definition { pos, definition })
+    .then(
+      description()
+        .map_with_span(|def, span| (span, def))
+    )
+    .map(|(pos, definition)|  Definition { pos, definition })
 }
 
 fn definition_block() -> impl Parser<char, Vec<Definition>, Error = Simple<char>> {
@@ -27,12 +31,14 @@ fn definition_block() -> impl Parser<char, Vec<Definition>, Error = Simple<char>
 pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
   let start = just("-").padded();
 
-  let gloss = ident();
+  let gloss = ident()
+    .map_with_span(|g, span| (span, g));
 
   let pronunciation = syllable()
     .separated_by(just("."))
     .at_least(1)
     .delimited_by(just("/"), just("/"))
+    .map_with_span(|p, span| (span, p))
     .padded();
 
   let definitions = whitespace().ignore_then(
@@ -58,9 +64,14 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Word {
-          gloss: "water".to_string(),
-          pronunciation: vec!["'wa".to_string(), "ter".to_string()],
-          definitions: vec![Definition { pos: Some("noun".to_string()), definition: "the liquid state of H20".to_string() }],
+          gloss: (2..7, "water".to_string()),
+          pronunciation: (8..17, vec!["'wa".to_string(), "ter".to_string()]),
+          definitions: vec![
+            Definition {
+              pos: Some((18..22, "noun".to_string())),
+              definition: (24..47, "the liquid state of H20".to_string()),
+            }
+          ],
         },
       )
     )
@@ -77,9 +88,14 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Word {
-          gloss: "water".to_string(),
-          pronunciation: vec!["'wa".to_string(), "ter".to_string()],
-          definitions: vec![Definition { pos: Some("noun".to_string()), definition: "the liquid state of H20".to_string() }],
+          gloss: (9..14, "water".to_string()),
+          pronunciation: (15..24, vec!["'wa".to_string(), "ter".to_string()]),
+          definitions: vec![
+            Definition {
+              pos: Some((35..39, "noun".to_string())),
+              definition: (41..64, "the liquid state of H20".to_string()),
+            }
+          ],
         },
       )
     )
@@ -97,11 +113,17 @@ mod test {
       parser().parse(src.to_string()),
       Ok(
         Stmt::Word {
-          gloss: "water".to_string(),
-          pronunciation: vec!["'wa".to_string(), "ter".to_string()],
+          gloss: (9..14, "water".to_string()),
+          pronunciation: (15..24, vec!["'wa".to_string(), "ter".to_string()]),
           definitions: vec![
-            Definition { pos: Some("noun".to_string()), definition: "the liquid state of H20".to_string() },
-            Definition { pos: Some("verb".to_string()), definition: "to pour water over a plant or area of land".to_string() },
+            Definition {
+              pos: Some((35..39, "noun".to_string())),
+              definition: (41..64, "the liquid state of H20".to_string()),
+            },
+            Definition {
+              pos: Some((73..77, "verb".to_string())),
+              definition: (79..121, "to pour water over a plant or area of land".to_string()),
+            },
           ],
         },
       )
