@@ -57,7 +57,7 @@ mod test {
   fn it_works() {
     assert!(
       _parse("
-        import core::ipa::*
+        import * from @core/ipa
 
         lang OEng : Old English
         lang OEng <- AmEng : American English
