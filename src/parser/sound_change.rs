@@ -39,6 +39,7 @@ fn source() -> impl Parser<char, Spanned<Source>, Error = Simple<char>> {
 
 fn modification() -> impl Parser<char, Target, Error = Simple<char>> {
   feature()
+    .map_with_span(|feat, span| (span, feat))
     .repeated()
     .at_least(1)
     .delimited_by(just("["), just("]"))
@@ -144,8 +145,8 @@ mod test {
             before: None,
             after: Some(vec![
               EnvElement::Segment(Segment::Category(Category {
-                base_class: Some('V'),
-                features: vec![Feature::Positive("close".to_string())]
+                base_class: Some((12..13, 'V')),
+                features: vec![(13..19, Feature::Positive("close".to_string()))]
               }))
             ])
           })),
@@ -184,13 +185,18 @@ mod test {
           source: (
             2..19,
             Source::Pattern(vec![Segment::Category(Category {
-              base_class: Some('C'),
-              features: vec![Feature::Positive("stop".to_string()), Feature::Positive("alveolar".to_string())]
+              base_class: Some((3..4, 'C')),
+              features: vec![
+                (4..9, Feature::Positive("stop".to_string())),
+                (9..18, Feature::Positive("alveolar".to_string())),
+              ],
             })])
           ),
           target: (
             22..29,
-            Target::Modification(vec![Feature::Positive("flap".to_string())])
+            Target::Modification(vec![
+              (23..28, Feature::Positive("flap".to_string())),
+            ])
           ),
           environment: None,
           description: None,
