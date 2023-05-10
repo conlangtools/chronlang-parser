@@ -1,6 +1,6 @@
 [package]
 name = "chronlang-parser"
-version = "0.1.4"
+version = "0.1.5"
 description = "A parser for Chronlang, a computer language for crafting constructed languages."
 license = "MIT"
 homepage = "https://conlang.tools/"
