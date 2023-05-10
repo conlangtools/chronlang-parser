@@ -53,8 +53,16 @@ pub fn feature() -> impl Parser<char, Feature, Error = Simple<char>> {
 }
 
 pub fn category() -> impl Parser<char, Category, Error = Simple<char>> {
-  class().padded().or_not()
-    .then(feature().repeated().at_least(1))
+  class()
+    .map_with_span(|class, span| (span, class))
+    .padded()
+    .or_not()
+    .then(
+      feature()
+        .map_with_span(|feat, span| (span, feat))
+        .repeated()
+        .at_least(1)
+    )
     .delimited_by(just("["), just("]"))
     .map(|(base_class, features)| Category { base_class, features })
 }

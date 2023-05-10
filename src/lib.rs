@@ -58,6 +58,13 @@ mod test {
     assert!(
       _parse("
         import * from @core/ipa
+        
+        series F = { i, e, ε, æ }
+
+        class X encodes (Place Manner) {
+          ℂ = velar trill,
+          ℤ = labiodental lateral_fricative ,
+        }
 
         lang OEng : Old English
         lang OEng < AmEng : American English

@@ -28,7 +28,13 @@ pub enum Stmt {
   },
   Class {
     label: Spanned<String>,
-    class: Class,
+    encodes: Vec<Spanned<String>>,
+    annotates: Vec<Spanned<String>>,
+    phonemes: Vec<PhonemeDef>,
+  },
+  Series {
+    label: Spanned<String>,
+    series: Spanned<Series>,
   },
   Trait {
     label: Spanned<String>,
@@ -48,7 +54,7 @@ pub enum Source {
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Target {
-  Modification(Vec<Feature>),
+  Modification(Vec<Spanned<Feature>>),
   Pattern(Pattern),
   Empty,
 }
@@ -69,8 +75,8 @@ pub enum Segment {
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Category {
-  pub base_class: Option<char>,
-  pub features: Vec<Feature>,
+  pub base_class: Option<Spanned<char>>,
+  pub features: Vec<Spanned<Feature>>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -88,7 +94,6 @@ pub enum EnvElement {
   WordBoundary,
 }
 
-
 #[derive(Debug, Clone, PartialEq)]
 pub struct Definition {
   pub pos: Option<Spanned<String>>,
@@ -96,14 +101,9 @@ pub struct Definition {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-pub enum Class {
-  Full {
-    encodes: Vec<Spanned<String>>,
-    annotates: Vec<Spanned<String>>,
-    phonemes: Vec<PhonemeDef>,
-  },
+pub enum Series {
   Category(Category),
-  List(Vec<String>),
+  List(Vec<Spanned<String>>),
 }
 
 #[derive(Debug, Clone, PartialEq)]

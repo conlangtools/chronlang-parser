@@ -3,6 +3,7 @@ use chumsky::{prelude::*, text::newline};
 use crate::ast::{Stmt, Spanned};
 
 mod class_definition;
+mod series_definition;
 mod common;
 mod import;
 mod lang_definition;
@@ -19,6 +20,7 @@ fn stmt() -> impl Parser<char, Stmt, Error = Simple<char>> {
     word_definition::parser().boxed(),
     trait_definition::parser().boxed(),
     class_definition::parser().boxed(),
+    series_definition::parser().boxed(),
     milestone::parser().boxed(),
   ])
     .then_ignore(newline().repeated().at_least(1).ignored().or(end()))
