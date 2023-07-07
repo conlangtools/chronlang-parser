@@ -1,4 +1,4 @@
-use chumsky::{prelude::*, text::newline};
+use chumsky::{prelude::*, text::{newline, whitespace}};
 
 use crate::ast::{Stmt, Spanned};
 
@@ -12,7 +12,7 @@ mod trait_definition;
 mod word_definition;
 mod milestone;
 
-fn stmt() -> impl Parser<char, Stmt, Error = Simple<char>> {
+fn stmt() -> impl Parser<char, Spanned<Stmt>, Error = Simple<char>> {
   choice([
     sound_change::parser().boxed(),
     import::parser().boxed(),
@@ -23,12 +23,13 @@ fn stmt() -> impl Parser<char, Stmt, Error = Simple<char>> {
     series_definition::parser().boxed(),
     milestone::parser().boxed(),
   ])
+    .map_with_span(|stmt, span| (span, stmt))
     .then_ignore(newline().repeated().at_least(1).ignored().or(end()))
+    .then_ignore(whitespace())
 }
 
 fn root() -> impl Parser<char, Vec<Spanned<Stmt>>, Error = Simple<char>> {
   stmt()
-    .map_with_span(|stmt, span| (span, stmt))
     .repeated()
     .padded()
     .then_ignore(end())
