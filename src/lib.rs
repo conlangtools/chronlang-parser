@@ -55,32 +55,34 @@ mod test {
 
   #[test]
   fn it_works() {
-    assert!(
-      _parse("
-        import * from @core/ipa
-        
-        series F = { i, e, ε, æ }
+    let res = _parse("
+      import * from @core/ipa
+      
+      series F = { i, e, ε, æ }
 
-        class X encodes (Place Manner) {
-          ℂ = velar trill,
-          ℤ = labiodental lateral_fricative ,
-        }
+      class X encodes (Place Manner) {
+        ℂ = velar trill,
+        ℤ = labiodental lateral_fricative ,
+      }
 
-        lang OEng : Old English
-        lang OEng < AmEng : American English
-        lang OEng < RP : Received Pronunciation
-        
-        @ 1000, OEng
-        
-        - water /ˈwæ.ter/ {
-          noun. liquid that forms the seas, lakes, rivers, and rain
-          verb. pour or sprinkle water over a plant or area
-        }
-        
-        @ 1940, AmEng
-        
-        $ [C+alveolar+stop] > [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
-      ").is_ok()
-    )
+      lang OEng : Old English
+      lang OEng < AmEng : American English
+      lang OEng < RP : Received Pronunciation
+      
+      @ 1000, OEng
+      
+      - water /ˈwæ.ter/ {
+        noun. liquid that forms the seas, lakes, rivers, and rain
+        verb. pour or sprinkle water over a plant or area
+      }
+      
+      @ 1940, AmEng
+      
+      $ [C+alveolar+stop] > [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
+    ");
+
+    println!("{:#?}", res);
+
+    assert!(res.is_ok())
   }
 }
