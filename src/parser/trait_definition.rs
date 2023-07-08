@@ -40,6 +40,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .map(|((default, labels), notation)| TraitMember { default, labels, notation });
 
   let body = member
+    .map_with_span(|m, span| (span, m))
     .separated_by(just(",").padded())
     .allow_trailing()
     .at_least(1)
@@ -71,9 +72,9 @@ mod test {
         Stmt::Trait {
           label: (13..18, "Place".into()),
           members: vec![
-            TraitMember { labels: vec![(29..35, "labial".into())], notation: None, default: false },
-            TraitMember { labels: vec![(45..53, "alveolar".into())], notation: None, default: false },
-            TraitMember { labels: vec![(63..68, "velar".into())], notation: None, default: false },
+            (29..35, TraitMember { labels: vec![(29..35, "labial".into())], notation: None, default: false }),
+            (45..53, TraitMember { labels: vec![(45..53, "alveolar".into())], notation: None, default: false }),
+            (63..68, TraitMember { labels: vec![(63..68, "velar".into())], notation: None, default: false }),
           ],
         },
       )
@@ -94,8 +95,8 @@ mod test {
         Stmt::Trait {
           label: (13..19, "Stress".into()),
           members: vec![
-            TraitMember { labels: vec![(30..37, "primary".into())], notation: Some((40..42, "ˈ_".into())), default: false },
-            TraitMember { labels: vec![(52..61, "secondary".into())], notation: Some((64..66, "ˌ_".into())), default: false },
+            (30..42, TraitMember { labels: vec![(30..37, "primary".into())], notation: Some((40..42, "ˈ_".into())), default: false }),
+            (52..66, TraitMember { labels: vec![(52..61, "secondary".into())], notation: Some((64..66, "ˌ_".into())), default: false }),
           ],
         },
       )
@@ -117,9 +118,9 @@ mod test {
         Stmt::Trait {
           label: (13..19, "Length".into()),
           members: vec![
-            TraitMember { labels: vec![(38..43, "short".into())], notation: None, default: true },
-            TraitMember { labels: vec![(53..57, "long".into())], notation: Some((60..62, "_:".into())), default: false },
-            TraitMember { labels: vec![(72..80, "overlong".into())], notation: Some((83..86, "_::".into())), default: false },
+            (30..43, TraitMember { labels: vec![(38..43, "short".into())], notation: None, default: true }),
+            (53..62, TraitMember { labels: vec![(53..57, "long".into())], notation: Some((60..62, "_:".into())), default: false }),
+            (72..86, TraitMember { labels: vec![(72..80, "overlong".into())], notation: Some((83..86, "_::".into())), default: false }),
           ],
         },
       )

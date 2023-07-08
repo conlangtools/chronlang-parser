@@ -52,6 +52,7 @@ pub fn parser() -> impl Parser<char, Stmt, Error = Simple<char>> {
     .map(|(label, traits)| PhonemeDef { label, traits });
   
   let body = phoneme_definition
+  .map_with_span(|ph, span| (span, ph))
     .separated_by(just(",").padded())
     .allow_trailing()
     .at_least(1)
@@ -86,10 +87,10 @@ mod test {
         encodes: vec![(17..22, "place".into()), (23..29, "manner".into())],
         annotates: vec![],
         phonemes: vec![
-          PhonemeDef { label: (43..44, "p".into()), traits: vec![(47..55, "bilabial".into()), (56..63, "plosive".into())] },
-          PhonemeDef { label: (75..76, "t".into()), traits: vec![(79..87, "alveolar".into()), (88..95, "plosive".into())] },
-          PhonemeDef { label: (107..108, "k".into()), traits: vec![(111..116, "velar".into()), (117..124, "plosive".into())] },
-          PhonemeDef { label: (136..139, "t͡s".into()), traits: vec![(142..150, "alveolar".into()), (151..160, "affricate".into())] },
+          (43..63, PhonemeDef { label: (43..44, "p".into()), traits: vec![(47..55, "bilabial".into()), (56..63, "plosive".into())] }),
+          (75..95, PhonemeDef { label: (75..76, "t".into()), traits: vec![(79..87, "alveolar".into()), (88..95, "plosive".into())] }),
+          (107..124, PhonemeDef { label: (107..108, "k".into()), traits: vec![(111..116, "velar".into()), (117..124, "plosive".into())] }),
+          (136..160, PhonemeDef { label: (136..139, "t͡s".into()), traits: vec![(142..150, "alveolar".into()), (151..160, "affricate".into())] }),
         ]
       })
     )
