@@ -32,7 +32,7 @@ pub enum Stmt {
     label: Spanned<String>,
     encodes: Vec<Spanned<String>>,
     annotates: Vec<Spanned<String>>,
-    phonemes: Vec<PhonemeDef>,
+    phonemes: Vec<Spanned<PhonemeDef>>,
   },
   Series {
     label: Spanned<String>,
@@ -40,7 +40,7 @@ pub enum Stmt {
   },
   Trait {
     label: Spanned<String>,
-    members: Vec<TraitMember>,
+    members: Vec<Spanned<TraitMember>>,
   },
   Milestone {
     time: Option<Spanned<Time>>,
