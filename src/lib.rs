@@ -5,57 +5,56 @@ pub mod ast;
 
 #[cfg(test)]
 mod test {
-  use super::*;
+    use super::*;
 
-  use crate::ast::{Stmt, Spanned};
+    use crate::ast::{Spanned, Stmt};
 
-  use ariadne::{
-    Report,
-    Label,
-    Source as SourceCode,
-    ReportKind, Color,
-  };
-  
-  use chumsky::{error::SimpleReason, prelude::Simple};
+    use ariadne::{Color, Label, Report, ReportKind, Source as SourceCode};
 
-  fn display_errs(src: &str, errs: &Vec<Simple<char>>) {
-    let start = errs.iter()
-      .map(|err| err.span())
-      .fold(src.len(), |min, cur| if cur.start < min { cur.start } else { min });
+    use chumsky::{error::SimpleReason, prelude::Simple};
 
-    Report::build(ReportKind::Error, (), start)
-      .with_labels(
-        errs.iter()
-          .map(|err| {
-            Label::new(err.span())
-            .with_message(match err.reason() {
-              SimpleReason::Unexpected => err.to_string(),
-              SimpleReason::Unclosed { span: _, delimiter } => format!("Unmatched delimited {}", delimiter),
-              SimpleReason::Custom(msg) => msg.clone(),
-            })
-            .with_color(Color::Red)
-          })
-      )
-      .finish()
-      .eprint(SourceCode::from(src.clone()))
-      .unwrap();
-  }
+    fn display_errs(src: &str, errs: &Vec<Simple<char>>) {
+        let start = errs
+            .iter()
+            .map(|err| err.span())
+            .fold(
+                src.len(),
+                |min, cur| if cur.start < min { cur.start } else { min },
+            );
 
-  fn _parse(src: &str) -> Result<Vec<Spanned<Stmt>>, Vec<Simple<char>>> {
-    let res = parse(src);
-
-    match res {
-      Ok(ast) => Ok(ast),
-      Err(errs) => {
-        display_errs(&src, &errs);
-        Err(errs)
-      },
+        Report::build(ReportKind::Error, (), start)
+            .with_labels(errs.iter().map(|err| {
+                Label::new(err.span())
+                    .with_message(match err.reason() {
+                        SimpleReason::Unexpected => err.to_string(),
+                        SimpleReason::Unclosed { span: _, delimiter } => {
+                            format!("Unmatched delimited {}", delimiter)
+                        }
+                        SimpleReason::Custom(msg) => msg.clone(),
+                    })
+                    .with_color(Color::Red)
+            }))
+            .finish()
+            .eprint(SourceCode::from(src.clone()))
+            .unwrap();
     }
-  }
 
-  #[test]
-  fn it_works() {
-    let res = _parse("
+    fn _parse(src: &str) -> Result<Vec<Spanned<Stmt>>, Vec<Simple<char>>> {
+        let res = parse(src);
+
+        match res {
+            Ok(ast) => Ok(ast),
+            Err(errs) => {
+                display_errs(&src, &errs);
+                Err(errs)
+            }
+        }
+    }
+
+    #[test]
+    fn it_works() {
+        let res = _parse(
+            "
       import * from @core/ipa
       
       series F = { i, e, ε, æ }
@@ -79,10 +78,11 @@ mod test {
       @ 1940, AmEng
       
       $ [C+alveolar+stop] > [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
-    ");
+    ",
+        );
 
-    println!("{:#?}", res);
+        println!("{:#?}", res);
 
-    assert!(res.is_ok())
-  }
+        assert!(res.is_ok())
+    }
 }

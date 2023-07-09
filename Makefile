@@ -1,3 +1,6 @@
+lint:
+	cargo clippy
+
 release-patch:
 	cargo release patch --no-publish --execute
 
