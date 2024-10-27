@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "run": "deno run --allow-read main.ts",
+    "dev": "deno run --allow-read --watch main.ts"
+  },
+  "imports": {
+    "peggy": "npm:peggy"
+  }
+}
