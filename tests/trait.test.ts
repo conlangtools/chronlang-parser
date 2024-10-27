@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a trait", () => {
@@ -57,9 +57,11 @@ Deno.test("Parse a trait", () => {
         }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a trait with a default member", () => {
@@ -118,9 +120,11 @@ Deno.test("Parse a trait with a default member", () => {
         }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a trait with aliased members", () => {
@@ -187,9 +191,11 @@ Deno.test("Parse a trait with aliased members", () => {
         }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 
@@ -261,7 +267,9 @@ Deno.test("Parse a trait with linebreaks", () => {
         }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })

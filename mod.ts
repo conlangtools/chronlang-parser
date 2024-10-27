@@ -5,7 +5,7 @@ export * as ast from "./ast/mod.ts"
 import { Stmt } from "./ast/statements.ts"
 
 type ParseResult =
-  | { ok: true, statements: Stmt[] }
+  | { ok: true, statements: readonly Stmt[] }
   | { ok: false, error: GrammarError }
 
 const parser = peggy.generate(Deno.readTextFileSync("./grammar.pegjs"))

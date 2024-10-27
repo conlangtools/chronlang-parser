@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a minimal sound change", () => {
@@ -45,9 +45,11 @@ Deno.test("Parse a minimal sound change", () => {
     },
     environment: null,
     description: null,
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a sound change with a description", () => {
@@ -101,9 +103,11 @@ Deno.test("Parse a sound change with a description", () => {
         end: { offset: 29, line: 2, column: 29 }
       }
     ],
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a sound change with an environment", () => {
@@ -180,7 +184,9 @@ Deno.test("Parse a sound change with an environment", () => {
       }
     },
     description: null,
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
