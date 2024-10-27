@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse an instant milestone without a language", () => {
@@ -19,9 +19,11 @@ Deno.test("Parse an instant milestone without a language", () => {
       }
     },
     language: null
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a range milestone without a language", () => {
@@ -43,9 +45,11 @@ Deno.test("Parse a range milestone without a language", () => {
       }
     },
     language: null
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse an instant milestone with a language", () => {
@@ -73,9 +77,11 @@ Deno.test("Parse an instant milestone with a language", () => {
         end: { offset: 16, line: 2, column: 16 }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a range milestone with a language", () => {
@@ -104,9 +110,11 @@ Deno.test("Parse a range milestone with a language", () => {
         end: { offset: 22, line: 2, column: 22 }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 

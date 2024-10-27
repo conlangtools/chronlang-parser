@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a category series", () => {
@@ -29,14 +29,7 @@ Deno.test("Parse a category series", () => {
     features: [
       {
         sign: "positive",
-        name: [
-          "fricative",
-          {
-            source,
-            start: { offset: 19, line: 2, column: 19 },
-            end: { offset: 28, line: 2, column: 28 }
-          }
-        ],
+        name: "fricative",
         span: {
           source,
           start: { offset: 18, line: 2, column: 18 },
@@ -49,9 +42,11 @@ Deno.test("Parse a category series", () => {
       start: { offset: 16, line: 2, column: 16 },
       end: { offset: 29, line: 2, column: 29 }
     }
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a list series", () => {
@@ -97,7 +92,9 @@ Deno.test("Parse a list series", () => {
         }
       ]
     ],
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })

@@ -16,7 +16,7 @@ export type Stmt =
 
 export type BaseImport = {
   path: Spanned<string>
-  names: Array<Spanned<string>>
+  names: readonly Spanned<string>[]
 }
 
 export type LocalImport = BaseImport & {
@@ -45,7 +45,7 @@ export type Language = {
 
 export type Milestone = {
   time: Time | null
-  language: Spanned<string>
+  language: Spanned<string> | null
 }
 
 export type Time = { span: Span } & (
@@ -58,11 +58,11 @@ export type Time = { span: Span } & (
 
 export type Trait = {
   label: Spanned<string>
-  members: Array<TraitMember>
+  members: readonly TraitMember[]
 }
 
 export type TraitMember = {
-  labels: Array<Spanned<string>>
+  labels: readonly Spanned<string>[]
   notation: Spanned<string> | null
   default: boolean
   span: Span
@@ -73,14 +73,14 @@ export type TraitMember = {
 
 export type Class = {
   label: Spanned<string>
-  encodes: Array<Spanned<string>>
-  annotates: Array<Spanned<string>>
-  phonemes: Array<PhonemeDef>
+  encodes: readonly Spanned<string>[]
+  annotates: readonly Spanned<string>[]
+  phonemes: readonly PhonemeDef[]
 }
 
 export type PhonemeDef = {
   label: Spanned<string>
-  traits: Array<Spanned<string>>
+  traits: readonly Spanned<string>[]
   span: Span
 }
 
@@ -89,7 +89,7 @@ export type PhonemeDef = {
 
 export type Series = { label: Spanned<string> } & (
   | { seriesKind: "category" } & Category
-  | { seriesKind: "list", phonemes: Array<Spanned<string>> }
+  | { seriesKind: "list", phonemes: readonly Spanned<string>[] }
 )
 
 
@@ -98,7 +98,7 @@ export type Series = { label: Spanned<string> } & (
 export type Word = {
   gloss: Spanned<string>,
   pronunciation: Spanned<string>
-  definitions: Array<Definition>
+  definitions: readonly Definition[]
 }
 
 export type Definition = {

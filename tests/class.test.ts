@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a trait", () => {
@@ -131,7 +131,9 @@ Deno.test("Parse a trait", () => {
         }
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })

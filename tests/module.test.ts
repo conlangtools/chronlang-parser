@@ -37,13 +37,14 @@ Deno.test("Parse a sequence of statements", () => {
   `
 
   const result = parse(source, "source-name")
-  assert(Array.isArray(result))
-  assertEquals(result.length, 11)
+  assert(result.ok)
+  assertEquals(result.statements.length, 11)
 })
 
 Deno.test("Parse a module from a file", () => {
   const sourceName = path.join(Deno.cwd(), "tests", "example.lang")
   const source = Deno.readTextFileSync(sourceName);
   const result = parse(source, sourceName)
-  assertEquals(result.length, 11)
+  assert(result.ok)
+  assertEquals(result.statements.length, 11)
 })

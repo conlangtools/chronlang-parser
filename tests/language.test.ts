@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a language definition with no name or parent", () => {
@@ -19,9 +19,11 @@ Deno.test("Parse a language definition with no name or parent", () => {
     ],
     name: null,
     parent: null
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a language definition with a name but no parent", () => {
@@ -49,9 +51,11 @@ Deno.test("Parse a language definition with a name but no parent", () => {
       }
     ],
     parent: null
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Don't include comments in language names", () => {
@@ -79,9 +83,11 @@ Deno.test("Don't include comments in language names", () => {
       }
     ],
     parent: null
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a language definition with a parent but no name", () => {
@@ -109,9 +115,11 @@ Deno.test("Parse a language definition with a parent but no name", () => {
         end: { offset: 19, line: 2, column: 19 }
       }
     ],
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a language definition with a name and a parent", () => {
@@ -146,7 +154,9 @@ Deno.test("Parse a language definition with a name and a parent", () => {
         end: { offset: 19, line: 2, column: 19 }
       }
     ],
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })

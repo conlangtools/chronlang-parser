@@ -13,13 +13,13 @@ export type Source = { span: Span } & (
 )
 
 export type Target = { span: Span } & (
-  | { kind: "modification", mods: Array<Feature> }
+  | { kind: "modification", mods: readonly Feature[] }
   | { kind: "pattern" } & Pattern
   | { kind: "empty" }
 )
 
 export type Pattern = {
-  segments: Array<Segment>
+  segments: readonly Segment[]
 }
 
 export type Segment =
@@ -28,7 +28,7 @@ export type Segment =
 
 export type Category = {
   baseClass: Spanned<string> | null
-  features: Array<Feature>
+  features: readonly Feature[]
   span: Span
 }
 
@@ -46,7 +46,7 @@ export type Environment = {
   span: Span
 }
 
-export type EnvPattern = Array<EnvElement>
+export type EnvPattern = readonly EnvElement[]
 
 export type EnvElement = { span: Span } & (
   | { kind: "pattern" } & Pattern

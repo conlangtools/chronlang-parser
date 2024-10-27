@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a minimal word definition", () => {
@@ -26,9 +26,11 @@ Deno.test("Parse a minimal word definition", () => {
       }
     ],
     definitions: []
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a word definition with a simple definition", () => {
@@ -68,9 +70,11 @@ Deno.test("Parse a word definition with a simple definition", () => {
         ]
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a word definition with multiple definitions", () => {
@@ -138,7 +142,9 @@ Deno.test("Parse a word definition with multiple definitions", () => {
         ]
       }
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })

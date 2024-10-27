@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 
 Deno.test("Parse a wildcard import from a local, relative path", () => {
@@ -27,9 +27,11 @@ Deno.test("Parse a wildcard import from a local, relative path", () => {
         end: { offset: 13, line: 2, column: 13 },
       }
     ]]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a wildcard import from a local, absolute path", () => {
@@ -58,9 +60,11 @@ Deno.test("Parse a wildcard import from a local, absolute path", () => {
         end: { offset: 13, line: 2, column: 13 },
       }
     ]]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 Deno.test("Parse a wildcard import from a scoped path", () => {
@@ -96,9 +100,11 @@ Deno.test("Parse a wildcard import from a scoped path", () => {
         end: { offset: 13, line: 2, column: 13 },
       }
     ]]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 
@@ -155,9 +161,11 @@ Deno.test("Parse a list import", () => {
         }
       ],
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
 
 
@@ -200,7 +208,9 @@ Deno.test("Parse a list import with linebreaks", () => {
         }
       ],
     ]
-  }]
+  }] as const;
 
-  assertEquals(parse(code, source), expectedAST)
+  const result = parse(code, source)
+  assert(result.ok)
+  assertEquals(result.statements, expectedAST)
 })
