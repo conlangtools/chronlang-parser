@@ -3,7 +3,7 @@
   & sequences of many statements.
 */
 
-import { assertEquals, assert } from "jsr:@std/assert";
+import { assert, assertEquals } from "jsr:@std/assert";
 import { parse } from "../mod.ts";
 import * as path from "jsr:@std/path";
 
@@ -34,17 +34,17 @@ Deno.test("Parse a sequence of statements", () => {
     }
 
     $ [C+alveolar+stop] > [+flap] / V_V : Alveolar stops lenite to flaps intervocallically
-  `
+  `;
 
-  const result = parse(source, "source-name")
-  assert(result.ok)
-  assertEquals(result.statements.length, 11)
-})
+  const result = parse(source, "source-name");
+  assert(result.ok);
+  assertEquals(result.statements.length, 11);
+});
 
 Deno.test("Parse a module from a file", () => {
-  const sourceName = path.join(Deno.cwd(), "tests", "example.lang")
+  const sourceName = path.join(Deno.cwd(), "tests", "example.lang");
   const source = Deno.readTextFileSync(sourceName);
-  const result = parse(source, sourceName)
-  assert(result.ok)
-  assertEquals(result.statements.length, 11)
-})
+  const result = parse(source, sourceName);
+  assert(result.ok);
+  assertEquals(result.statements.length, 11);
+});

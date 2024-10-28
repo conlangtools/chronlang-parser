@@ -1,4 +1,7 @@
 {
+  "name": "@conlangtools/chronlang-parser",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
   "tasks": {
     "run": "deno run --allow-read main.ts",
     "dev": "deno run --allow-read --watch main.ts"
