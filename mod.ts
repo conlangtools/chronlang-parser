@@ -8,7 +8,7 @@ type ParseResult =
 const parser = peggy.generate(Deno.readTextFileSync("./grammar.pegjs"));
 
 export * as ast from "./ast/mod.ts";
-export const { GrammarError } = peggy;
+export const GrammarError = peggy.GrammarError;
 
 export function parse(source: string, sourceName: string): ParseResult {
   try {
