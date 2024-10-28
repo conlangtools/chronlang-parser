@@ -7,6 +7,6 @@
     "dev": "deno run --allow-read --watch main.ts"
   },
   "imports": {
-    "peggy": "npm:peggy"
+    "peggy": "npm:peggy@4.1"
   }
 }
