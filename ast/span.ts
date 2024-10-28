@@ -5,6 +5,7 @@ export type Position = {
 };
 
 export type Span = {
+  source: string;
   start: Position;
   end: Position;
 };
