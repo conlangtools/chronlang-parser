@@ -5,7 +5,7 @@
       "jsr:@std/assert": "jsr:@std/assert@1.0.6",
       "jsr:@std/internal@^1.0.4": "jsr:@std/internal@1.0.4",
       "jsr:@std/path": "jsr:@std/path@1.0.6",
-      "npm:peggy": "npm:peggy@4.1.1"
+      "npm:peggy@4.1": "npm:peggy@4.1.1"
     },
     "jsr": {
       "@std/assert@1.0.6": {
@@ -53,7 +53,7 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "npm:peggy"
+      "npm:peggy@4.1"
     ]
   }
 }
