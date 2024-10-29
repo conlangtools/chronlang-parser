@@ -1,11 +1,12 @@
 import peggy from "peggy";
+import grammar from "./grammar.ts"
 import type { Stmt } from "./ast/statements.ts";
 
 type ParseResult =
   | { ok: true; statements: readonly Stmt[] }
   | { ok: false; error: peggy.GrammarError };
 
-const parser = peggy.generate(Deno.readTextFileSync("./grammar.pegjs"));
+const parser = peggy.generate(grammar);
 
 export * as ast from "./ast/mod.ts";
 export const GrammarError = peggy.GrammarError;
