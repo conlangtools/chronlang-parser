@@ -1,6 +1,6 @@
 {
   "name": "@conlangtools/chronlang-parser",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "exports": "./mod.ts",
   "tasks": {
     "build": "deno run -WR build.ts",
