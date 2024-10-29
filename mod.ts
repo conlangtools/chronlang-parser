@@ -2,7 +2,7 @@ import peggy from "peggy";
 import grammar from "./grammar.ts"
 import type { Stmt } from "./ast/statements.ts";
 
-const parser = peggy.generate(grammar);
+const parser: peggy.Parser = peggy.generate(grammar);
 
 export * as ast from "./ast/mod.ts";
 export const SyntaxError = parser.SyntaxError;

@@ -1,4 +1,4 @@
-const grammar = String.raw`start = eol? stmts:statement|1.., eol| eol? !.
+const grammar: string = String.raw`start = eol? stmts:statement|1.., eol| eol? !.
         { return stmts.filter(stmt => typeof stmt !== "string") }
 
 statement

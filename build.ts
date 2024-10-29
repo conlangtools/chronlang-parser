@@ -1,7 +1,7 @@
 const grammar = Deno.readTextFileSync("./grammar.pegjs");
 
 Deno.writeTextFileSync("grammar.ts", `\
-const grammar = String.raw\`\
+const grammar: string = String.raw\`\
 ${grammar}
 \`
 
