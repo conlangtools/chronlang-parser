@@ -9,7 +9,7 @@ type ParseResult =
 const parser = peggy.generate(grammar);
 
 export * as ast from "./ast/mod.ts";
-export const GrammarError = peggy.GrammarError;
+export type GrammarError = peggy.GrammarError;
 
 export function parse(source: string, sourceName: string): ParseResult {
   try {
