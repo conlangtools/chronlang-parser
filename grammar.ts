@@ -16,7 +16,7 @@ statement
 // COMMON
 
 _  "inline whitespace" = [ \t]*       { return "WS" }
-__ "whitespace" = [ \t\r\n]*   { return "WS" }
+__ "whitespace" = [ \t\r\n]*          { return "WS" }
 eol "newline" = _ comment? [\r\n]+ __ { return "EOL" }
 
 comment = "//" text:$(!eol .)* { return text.trim() }
@@ -34,7 +34,7 @@ identChar = !specialChar
   / [\u00A1-\u00FF]        // Latin-1 Supplement (excluding C1 Controls & non-breaking space)
   / [\u0100-\u017F]        // Latin Extended-A
   / [\u0180-\u024F]        // Latin Extended-B
-  / [\u0250-\u0251]        // IPA Extensions
+  / [\u0250-\u02AF]        // IPA Extensions
   / [\u0370-\u0373]        // Greek and Coptic (excluding modifiers and diacritics)
   / [\u0376-\u0377]
   / [\u037B-\u037D]
