@@ -27,16 +27,8 @@ Deno.test("Parse a minimal sound change", () => {
       },
     },
     target: {
-      kind: "pattern",
-      segments: [{
-        kind: "phonemes",
-        glyphs: "b",
-        span: {
-          source,
-          start: { offset: 11, line: 2, column: 11 },
-          end: { offset: 12, line: 2, column: 12 },
-        },
-      }],
+      kind: "phonemes",
+      glyphs: "b",
       span: {
         source,
         start: { offset: 11, line: 2, column: 11 },
@@ -78,16 +70,8 @@ Deno.test("Parse a sound change with a description", () => {
       },
     },
     target: {
-      kind: "pattern",
-      segments: [{
-        kind: "phonemes",
-        glyphs: "b",
-        span: {
-          source,
-          start: { offset: 11, line: 2, column: 11 },
-          end: { offset: 12, line: 2, column: 12 },
-        },
-      }],
+      kind: "phonemes",
+      glyphs: "b",
       span: {
         source,
         start: { offset: 11, line: 2, column: 11 },
@@ -136,16 +120,8 @@ Deno.test("Parse a sound change with an environment", () => {
       },
     },
     target: {
-      kind: "pattern",
-      segments: [{
-        kind: "phonemes",
-        glyphs: "c",
-        span: {
-          source,
-          start: { offset: 11, line: 2, column: 11 },
-          end: { offset: 12, line: 2, column: 12 },
-        },
-      }],
+      kind: "phonemes",
+      glyphs: "c",
       span: {
         source,
         start: { offset: 11, line: 2, column: 11 },

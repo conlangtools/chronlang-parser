@@ -153,12 +153,13 @@ wordSense = partOfSpeech:ident "." _ text:(def:$(!eol .)+ { return [def, locatio
 soundChangeDefinition = "$" _ source:source _ ">" _ target:target environment:conditionClause? description:soundChangeDescription?
                         { return { kind: "sound-change", source, target, environment, description } }
 
-source = source:(pattern / empty)
+source = source:(sourcePattern / empty)
          { return { ...source, span: location() } }
-target = target:(modifier / pattern / empty)
+target = target:(targetPattern / modifier / empty)
          { return { ...target, span: location() } }
 
-pattern = segments:segment+ { return { kind: "pattern", segments } }
+sourcePattern = segments:segment+ { return { kind: "pattern", segments } }
+targetPattern = glyphs:ident { return { kind: "phonemes", glyphs: glyphs[0] } }
 segment = glyphs:ident { return { kind: "phonemes", glyphs: glyphs[0], span: glyphs[1] } }
         / cat:category { return { kind: "category", ...cat } }
 modifier = "[" mods:feature+ "]" { return { kind: "modification", mods } }
@@ -169,6 +170,6 @@ condition = as:"#"? before:envPattern? "_" after:envPattern? ae:"#"?
             { return { before: before ?? [], after: after ?? [], anchorStart: as !== null, anchorEnd: ae !== null, span: location() } }
 envPattern = envElement|1..|
 envElement = "." { return { kind: "syllable-boundary", span: location() } }
-           / p:pattern { return { ...p, span: location() } }
+           / p:sourcePattern { return { ...p, span: location() } }
 
 soundChangeDescription = _ ":" _ desc:(text:$(!eol .)* { return [text, location()] }) { return desc }

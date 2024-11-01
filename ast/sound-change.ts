@@ -18,7 +18,7 @@ export type Target =
   & { span: Span }
   & (
     | { kind: "modification"; mods: readonly Feature[] }
-    | { kind: "pattern" } & Pattern
+    | { kind: "phonemes"; glyphs: string }
     | { kind: "empty" }
   );
 
