@@ -35,6 +35,8 @@ identChar = !specialChar
   / [\u0100-\u017F]        // Latin Extended-A
   / [\u0180-\u024F]        // Latin Extended-B
   / [\u0250-\u02AF]        // IPA Extensions
+  / [\u035C]               // Combining Double Breve Below
+  / [\u0361]               // Combining Double Inverted Breve
   / [\u0370-\u0373]        // Greek and Coptic (excluding modifiers and diacritics)
   / [\u0376-\u0377]
   / [\u037B-\u037D]
