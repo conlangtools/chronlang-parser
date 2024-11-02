@@ -60,7 +60,7 @@ featurePrefix = sign:("+" / "-")
   { return sign === "+" ? "positive" : "negative" }
 feature = sign:featurePrefix name:ident
   { return { sign, name: name[0], span: location() } }
-category = "[" baseClass:ident? features:feature+ "]"
+category = "[" baseClass:ident? features:feature* "]"
   { return { baseClass, features, span: location() } }
 
 // IMPORTS

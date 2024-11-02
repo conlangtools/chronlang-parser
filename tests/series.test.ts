@@ -49,6 +49,44 @@ Deno.test("Parse a category series", () => {
   assertEquals(result.statements, expectedAST);
 });
 
+Deno.test("Parse a category series with no modifiers", () => {
+  const source = "source-name";
+  const code = `
+    series V = [Vowels]
+  `;
+
+  const expectedAST = [{
+    kind: "series",
+    label: [
+      "V",
+      {
+        source,
+        start: { offset: 12, line: 2, column: 12 },
+        end: { offset: 13, line: 2, column: 13 },
+      },
+    ],
+    seriesKind: "category",
+    baseClass: [
+      "Vowels",
+      {
+        source,
+        start: { offset: 17, line: 2, column: 17 },
+        end: { offset: 23, line: 2, column: 23 },
+      },
+    ],
+    features: [],
+    span: {
+      source,
+      start: { offset: 16, line: 2, column: 16 },
+      end: { offset: 24, line: 2, column: 24 },
+    },
+  }] as const;
+
+  const result = parse(code, source);
+  assert(result.ok);
+  assertEquals(result.statements, expectedAST);
+});
+
 Deno.test("Parse a list series", () => {
   const source = "source-name";
   const code = `
