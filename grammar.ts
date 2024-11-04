@@ -153,9 +153,9 @@ wordSense = partOfSpeech:ident "." _ text:(def:$(!eol .)+ { return [def, locatio
 soundChangeDefinition = "$" _ source:source _ ">" _ target:target environment:conditionClause? description:soundChangeDescription?
                         { return { kind: "sound-change", source, target, environment, description } }
 
-source = source:(sourcePattern / empty)
+source = source:(empty / sourcePattern)
          { return { ...source, span: location() } }
-target = target:(targetPattern / modifier / empty)
+target = target:(empty / targetPattern / modifier)
          { return { ...target, span: location() } }
 
 sourcePattern = segments:segment+ { return { kind: "pattern", segments } }
