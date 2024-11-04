@@ -44,6 +44,82 @@ Deno.test("Parse a minimal sound change", () => {
   assertEquals(result.statements, expectedAST);
 });
 
+Deno.test("Parse a sound change with an empty source", () => {
+  const source = "source-name";
+  const code = `
+    $ [] > x
+  `;
+
+  const expectedAST = [{
+    kind: "sound-change",
+    source: {
+      kind: "empty",
+      span: {
+        source,
+        start: { offset: 7, line: 2, column: 7 },
+        end: { offset: 9, line: 2, column: 9 },
+      },
+    },
+    target: {
+      kind: "phonemes",
+      glyphs: "x",
+      span: {
+        source,
+        start: { offset: 12, line: 2, column: 12 },
+        end: { offset: 13, line: 2, column: 13 },
+      },
+    },
+    environment: null,
+    description: null,
+  }] as const;
+
+  const result = parse(code, source);
+  assert(result.ok);
+  assertEquals(result.statements, expectedAST);
+});
+
+Deno.test("Parse a sound change with an empty target", () => {
+  const source = "source-name";
+  const code = `
+    $ x > []
+  `;
+
+  const expectedAST = [{
+    kind: "sound-change",
+    source: {
+      kind: "pattern",
+      segments: [{
+        kind: "phonemes",
+        glyphs: "x",
+        span: {
+          source,
+          start: { offset: 7, line: 2, column: 7 },
+          end: { offset: 8, line: 2, column: 8 },
+        },
+      }],
+      span: {
+        source,
+        start: { offset: 7, line: 2, column: 7 },
+        end: { offset: 8, line: 2, column: 8 },
+      },
+    },
+    target: {
+      kind: "empty",
+      span: {
+        source,
+        start: { offset: 11, line: 2, column: 11 },
+        end: { offset: 13, line: 2, column: 13 },
+      },
+    },
+    environment: null,
+    description: null,
+  }] as const;
+
+  const result = parse(code, source);
+  assert(result.ok);
+  assertEquals(result.statements, expectedAST);
+});
+
 Deno.test("Parse a sound change with a description", () => {
   const source = "source-name";
   const code = `
