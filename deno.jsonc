@@ -5,8 +5,5 @@
   "tasks": {
     "build": "deno run -WR build.ts",
     "test": "deno run build && deno test"
-  },
-  "imports": {
-    "peggy": "npm:peggy@4.1"
   }
 }
