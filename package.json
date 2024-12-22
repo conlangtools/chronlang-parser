@@ -11,6 +11,7 @@
   ],
   "main": "./dist/chronlang-parser.mjs",
   "module": "./dist/chronlang-parser.umd.js",
+  "types": "./dist/chronlang-parser.d.ts",
   "exports": {
     ".": {
       "import": "./dist/chronlang-parser.js",
