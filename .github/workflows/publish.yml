@@ -64,7 +64,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.40
+          deno-version: v2.1
       - name: Publish to JSR
         run: deno publish
 
@@ -83,7 +83,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.40
+          deno-version: v2.1
       - name: Install Yarn
         run: npm i -g yarn
       - name: Set Package Version
