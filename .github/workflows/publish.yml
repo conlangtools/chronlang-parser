@@ -89,14 +89,10 @@ jobs:
       - name: Set Package Version
         env:
           TAG: ${{ needs.create-tag.outputs.tag }}
-        run: |
-          cd ./web-wrapper
-          yarn version --no-git-tag-version --new-version "${TAG:1}"
+        run: yarn version --no-git-tag-version --new-version "${TAG:1}"
       - name: Bundle Package
         run: deno task bundle
       - name: Publish to NPM Registry
-        run: |
-          cd ./web-wrapper
-          yarn publish --access public
+        run: yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
