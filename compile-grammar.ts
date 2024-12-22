@@ -1,6 +1,6 @@
-const grammar = Deno.readTextFileSync("./grammar.pegjs");
+const grammar = Deno.readTextFileSync("./src/grammar.pegjs");
 
-Deno.writeTextFileSync("grammar.ts", `\
+Deno.writeTextFileSync("src/grammar.ts", `\
 const grammar: string = String.raw\`\
 ${grammar}
 \`

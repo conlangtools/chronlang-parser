@@ -7,7 +7,7 @@
  */
 
 import peggy from "peggy";
-import grammar from "../grammar.ts"
+import grammar from "./grammar.ts"
 import type { Stmt } from "./ast/statements.ts";
 
 const parser: peggy.Parser = peggy.generate(grammar);
