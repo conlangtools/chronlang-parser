@@ -1,9 +1,13 @@
 {
   "name": "@conlangtools/chronlang-parser",
   "version": "0.1.15",
-  "exports": "./mod.ts",
+  "exports": "./src/mod.ts",
   "tasks": {
-    "build": "deno run -WR build.ts",
-    "test": "deno run build && deno test"
+    "compile-grammar": "deno run --allow-read --allow-write compile-grammar.ts",
+    "test": "deno run compile-grammar && deno test",
+    "bundle": "npx vite build"
+  },
+  "imports": {
+    "peggy": "npm:peggy@4.1"
   }
 }

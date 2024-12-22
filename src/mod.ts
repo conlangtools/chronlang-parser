@@ -6,8 +6,8 @@
  * ``
  */
 
-import peggy from "npm:peggy@4.1";
-import grammar from "./grammar.ts"
+import peggy from "peggy";
+import grammar from "../grammar.ts"
 import type { Stmt } from "./ast/statements.ts";
 
 const parser: peggy.Parser = peggy.generate(grammar);

@@ -1,0 +1,28 @@
+{
+  "name": "@conlangtools/chronlang-parser",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Fergus Bentley (fergcb.uk)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/chronlang-parser.mjs",
+  "module": "./dist/chronlang-parser.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/chronlang-parser.js",
+      "require": "./dist/chronlang-parser.umd.cjs"
+    }
+  },
+  "dependencies": {
+    "peggy": "^4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0"
+  }
+}

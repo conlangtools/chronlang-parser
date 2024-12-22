@@ -1,1 +1,3 @@
 *.ohm-bundle.*
+node_modules/
+dist/

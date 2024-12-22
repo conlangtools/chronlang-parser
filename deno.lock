@@ -4,22 +4,204 @@
     "specifiers": {
       "jsr:@std/assert": "jsr:@std/assert@1.0.6",
       "jsr:@std/internal@^1.0.4": "jsr:@std/internal@1.0.4",
-      "jsr:@std/path": "jsr:@std/path@1.0.6"
+      "jsr:@std/path": "jsr:@std/path@1.0.6",
+      "npm:peggy@4.1": "npm:peggy@4.1.1",
+      "npm:rollup": "npm:rollup@4.29.1"
     },
     "jsr": {
       "@std/assert@1.0.6": {
-        "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
         "dependencies": [
           "jsr:@std/internal@^1.0.4"
         ]
       },
-      "@std/internal@1.0.4": {
-        "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
+      "@std/internal@1.0.4": {},
+      "@std/path@1.0.6": {}
+    },
+    "npm": {
+      "@peggyjs/from-mem@1.3.4": {
+        "integrity": "sha512-6DqaCO73ihyM2AJ2Vl4QQGmmU3MoD4hFh0RFRzxPdLkSLfE0QMEyDfaojE/R3KbsL1UP4VQyJA2clwX4agSTBw==",
+        "dependencies": {
+          "semver": "semver@7.6.3"
+        }
       },
-      "@std/path@1.0.6": {
-        "integrity": "ab2c55f902b380cf28e0eec501b4906e4c1960d13f00e11cfbcd21de15f18fed"
+      "@rollup/rollup-android-arm-eabi@4.29.1": {
+        "integrity": "sha512-ssKhA8RNltTZLpG6/QNkCSge+7mBQGUqJRisZ2MDQcEGaK93QESEgWK2iOpIDZ7k9zPVkG5AS3ksvD5ZWxmItw==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-android-arm64@4.29.1": {
+        "integrity": "sha512-CaRfrV0cd+NIIcVVN/jx+hVLN+VRqnuzLRmfmlzpOzB87ajixsN/+9L5xNmkaUUvEbI5BmIKS+XTwXsHEb65Ew==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-darwin-arm64@4.29.1": {
+        "integrity": "sha512-2ORr7T31Y0Mnk6qNuwtyNmy14MunTAMx06VAPI6/Ju52W10zk1i7i5U3vlDRWjhOI5quBcrvhkCHyF76bI7kEw==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-darwin-x64@4.29.1": {
+        "integrity": "sha512-j/Ej1oanzPjmN0tirRd5K2/nncAhS9W6ICzgxV+9Y5ZsP0hiGhHJXZ2JQ53iSSjj8m6cRY6oB1GMzNn2EUt6Ng==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-freebsd-arm64@4.29.1": {
+        "integrity": "sha512-91C//G6Dm/cv724tpt7nTyP+JdN12iqeXGFM1SqnljCmi5yTXriH7B1r8AD9dAZByHpKAumqP1Qy2vVNIdLZqw==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-freebsd-x64@4.29.1": {
+        "integrity": "sha512-hEioiEQ9Dec2nIRoeHUP6hr1PSkXzQaCUyqBDQ9I9ik4gCXQZjJMIVzoNLBRGet+hIUb3CISMh9KXuCcWVW/8w==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-arm-gnueabihf@4.29.1": {
+        "integrity": "sha512-Py5vFd5HWYN9zxBv3WMrLAXY3yYJ6Q/aVERoeUFwiDGiMOWsMs7FokXihSOaT/PMWUty/Pj60XDQndK3eAfE6A==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-arm-musleabihf@4.29.1": {
+        "integrity": "sha512-RiWpGgbayf7LUcuSNIbahr0ys2YnEERD4gYdISA06wa0i8RALrnzflh9Wxii7zQJEB2/Eh74dX4y/sHKLWp5uQ==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-arm64-gnu@4.29.1": {
+        "integrity": "sha512-Z80O+taYxTQITWMjm/YqNoe9d10OX6kDh8X5/rFCMuPqsKsSyDilvfg+vd3iXIqtfmp+cnfL1UrYirkaF8SBZA==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-arm64-musl@4.29.1": {
+        "integrity": "sha512-fOHRtF9gahwJk3QVp01a/GqS4hBEZCV1oKglVVq13kcK3NeVlS4BwIFzOHDbmKzt3i0OuHG4zfRP0YoG5OF/rA==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-loongarch64-gnu@4.29.1": {
+        "integrity": "sha512-5a7q3tnlbcg0OodyxcAdrrCxFi0DgXJSoOuidFUzHZ2GixZXQs6Tc3CHmlvqKAmOs5eRde+JJxeIf9DonkmYkw==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-powerpc64le-gnu@4.29.1": {
+        "integrity": "sha512-9b4Mg5Yfz6mRnlSPIdROcfw1BU22FQxmfjlp/CShWwO3LilKQuMISMTtAu/bxmmrE6A902W2cZJuzx8+gJ8e9w==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-riscv64-gnu@4.29.1": {
+        "integrity": "sha512-G5pn0NChlbRM8OJWpJFMX4/i8OEU538uiSv0P6roZcbpe/WfhEO+AT8SHVKfp8qhDQzaz7Q+1/ixMy7hBRidnQ==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-s390x-gnu@4.29.1": {
+        "integrity": "sha512-WM9lIkNdkhVwiArmLxFXpWndFGuOka4oJOZh8EP3Vb8q5lzdSCBuhjavJsw68Q9AKDGeOOIHYzYm4ZFvmWez5g==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-x64-gnu@4.29.1": {
+        "integrity": "sha512-87xYCwb0cPGZFoGiErT1eDcssByaLX4fc0z2nRM6eMtV9njAfEE6OW3UniAoDhX4Iq5xQVpE6qO9aJbCFumKYQ==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-linux-x64-musl@4.29.1": {
+        "integrity": "sha512-xufkSNppNOdVRCEC4WKvlR1FBDyqCSCpQeMMgv9ZyXqqtKBfkw1yfGMTUTs9Qsl6WQbJnsGboWCp7pJGkeMhKA==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-win32-arm64-msvc@4.29.1": {
+        "integrity": "sha512-F2OiJ42m77lSkizZQLuC+jiZ2cgueWQL5YC9tjo3AgaEw+KJmVxHGSyQfDUoYR9cci0lAywv2Clmckzulcq6ig==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-win32-ia32-msvc@4.29.1": {
+        "integrity": "sha512-rYRe5S0FcjlOBZQHgbTKNrqxCBUmgDJem/VQTCcTnA2KCabYSWQDrytOzX7avb79cAAweNmMUb/Zw18RNd4mng==",
+        "dependencies": {}
+      },
+      "@rollup/rollup-win32-x64-msvc@4.29.1": {
+        "integrity": "sha512-+10CMg9vt1MoHj6x1pxyjPSMjHTIlqs8/tBztXvPAx24SKs9jwVnKqHJumlH/IzhaPUaj3T6T6wfZr8okdXaIg==",
+        "dependencies": {}
+      },
+      "@types/estree@1.0.6": {
+        "integrity": "sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==",
+        "dependencies": {}
+      },
+      "commander@12.1.0": {
+        "integrity": "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==",
+        "dependencies": {}
+      },
+      "fsevents@2.3.3": {
+        "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
+        "dependencies": {}
+      },
+      "peggy@4.1.1": {
+        "integrity": "sha512-2emciJQKahHJpT7f1asizGSnJ8bq0TKgWMXnCrtAaSH1NIXaGifYxL5m5KMrCdlaqaQJz3SVexNkx+I+Vz66VA==",
+        "dependencies": {
+          "@peggyjs/from-mem": "@peggyjs/from-mem@1.3.4",
+          "commander": "commander@12.1.0",
+          "source-map-generator": "source-map-generator@0.8.0"
+        }
+      },
+      "rollup@4.29.1": {
+        "integrity": "sha512-RaJ45M/kmJUzSWDs1Nnd5DdV4eerC98idtUOVr6FfKcgxqvjwHmxc5upLF9qZU9EpsVzzhleFahrT3shLuJzIw==",
+        "dependencies": {
+          "@rollup/rollup-android-arm-eabi": "@rollup/rollup-android-arm-eabi@4.29.1",
+          "@rollup/rollup-android-arm64": "@rollup/rollup-android-arm64@4.29.1",
+          "@rollup/rollup-darwin-arm64": "@rollup/rollup-darwin-arm64@4.29.1",
+          "@rollup/rollup-darwin-x64": "@rollup/rollup-darwin-x64@4.29.1",
+          "@rollup/rollup-freebsd-arm64": "@rollup/rollup-freebsd-arm64@4.29.1",
+          "@rollup/rollup-freebsd-x64": "@rollup/rollup-freebsd-x64@4.29.1",
+          "@rollup/rollup-linux-arm-gnueabihf": "@rollup/rollup-linux-arm-gnueabihf@4.29.1",
+          "@rollup/rollup-linux-arm-musleabihf": "@rollup/rollup-linux-arm-musleabihf@4.29.1",
+          "@rollup/rollup-linux-arm64-gnu": "@rollup/rollup-linux-arm64-gnu@4.29.1",
+          "@rollup/rollup-linux-arm64-musl": "@rollup/rollup-linux-arm64-musl@4.29.1",
+          "@rollup/rollup-linux-loongarch64-gnu": "@rollup/rollup-linux-loongarch64-gnu@4.29.1",
+          "@rollup/rollup-linux-powerpc64le-gnu": "@rollup/rollup-linux-powerpc64le-gnu@4.29.1",
+          "@rollup/rollup-linux-riscv64-gnu": "@rollup/rollup-linux-riscv64-gnu@4.29.1",
+          "@rollup/rollup-linux-s390x-gnu": "@rollup/rollup-linux-s390x-gnu@4.29.1",
+          "@rollup/rollup-linux-x64-gnu": "@rollup/rollup-linux-x64-gnu@4.29.1",
+          "@rollup/rollup-linux-x64-musl": "@rollup/rollup-linux-x64-musl@4.29.1",
+          "@rollup/rollup-win32-arm64-msvc": "@rollup/rollup-win32-arm64-msvc@4.29.1",
+          "@rollup/rollup-win32-ia32-msvc": "@rollup/rollup-win32-ia32-msvc@4.29.1",
+          "@rollup/rollup-win32-x64-msvc": "@rollup/rollup-win32-x64-msvc@4.29.1",
+          "@types/estree": "@types/estree@1.0.6",
+          "fsevents": "fsevents@2.3.3"
+        }
+      },
+      "semver@7.6.3": {
+        "integrity": "sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==",
+        "dependencies": {}
+      },
+      "source-map-generator@0.8.0": {
+        "integrity": "sha512-psgxdGMwl5MZM9S3FWee4EgsEaIjahYV5AzGnwUvPhWeITz/j6rKpysQHlQ4USdxvINlb8lKfWGIXwfkrgtqkA==",
+        "dependencies": {}
       }
     }
   },
-  "remote": {}
+  "remote": {
+    "https://jsr.io/@std/assert/1.0.6/almost_equals.ts": "868c02e8fbcf209dbc416cfb031e234686c8f4ae038862fcc10d95d1d357d9df",
+    "https://jsr.io/@std/assert/1.0.6/array_includes.ts": "15bf0c203199675d390334fb066009d9bd781c8dfb047996d9265f8f0ed002aa",
+    "https://jsr.io/@std/assert/1.0.6/assert.ts": "be1fe368187a25f49c177d19b16a67d30969e0455a765910655ab7fbb8eaed31",
+    "https://jsr.io/@std/assert/1.0.6/assertion_error.ts": "95856e579d55629205f886356bd53c20a4f8ab5faef1c112c1ef3ba9d344ad86",
+    "https://jsr.io/@std/assert/1.0.6/equal.ts": "7a290c82d5677b195c5b99f3f4cfee87f7ea99140dcb102616180b0207027b60",
+    "https://jsr.io/@std/assert/1.0.6/equals.ts": "1a956f80b72e4a18e7d5529a8a2ff8b45d88b7c7f1f309fe8b28e16c14974203",
+    "https://jsr.io/@std/assert/1.0.6/exists.ts": "5c60be3b98672c90b6f2414c3f6dd683c45efd46f406501017ae1129f5bec7a1",
+    "https://jsr.io/@std/assert/1.0.6/fail.ts": "8bf3a6b11832be29f859258ee0206ae327ae3a6f4da2ddfe029174c761a978e4",
+    "https://jsr.io/@std/assert/1.0.6/false.ts": "565e2a4974f8d8b1448d857ce7f3b432eded50a909eb323aa4525b6dbab80d99",
+    "https://jsr.io/@std/assert/1.0.6/greater.ts": "7a2bd7eaa2cf029f9fc1848a454b73d55057ed5937727175af3a2260371b672a",
+    "https://jsr.io/@std/assert/1.0.6/greater_or_equal.ts": "536bde1aa4280a767c7ae7adcef16b4b5e5347f7489957fd7b415c143bdcdd00",
+    "https://jsr.io/@std/assert/1.0.6/instance_of.ts": "75326cc6d2f5dd569c6601c7ba7b21a9c0669b69a9b12b4cb8e66b60ce2c12ef",
+    "https://jsr.io/@std/assert/1.0.6/is_error.ts": "6fbce7c350b929e9ceb18c8cacc08f7f4036946bc4977fbe6eea873b72b2d69e",
+    "https://jsr.io/@std/assert/1.0.6/less.ts": "2c2463767abe86d0dd171dd3c36629a91d3c3c4cc4c2f84a4de294727374e291",
+    "https://jsr.io/@std/assert/1.0.6/less_or_equal.ts": "96ff8b82b63181ae7db28a78354b6edcd6054c74f5fbcf32a5ff2847366d2732",
+    "https://jsr.io/@std/assert/1.0.6/match.ts": "2a01781be327626dd884357262db53c39b5e59e963d4ef44fdf89930d40149c4",
+    "https://jsr.io/@std/assert/1.0.6/mod.ts": "7e787d7d0022235331814ee96f7f6f2aa4ee1bbdf616d63226773e817e8bb28e",
+    "https://jsr.io/@std/assert/1.0.6/not_equals.ts": "b6b4e283dd89f044415a0a82c402bc25729feeb5e9618a2f2b60287c06b4e133",
+    "https://jsr.io/@std/assert/1.0.6/not_instance_of.ts": "79d23964d158a3ca32ec91722134bad12a737a49ca573b4ff62db5776dc9a309",
+    "https://jsr.io/@std/assert/1.0.6/not_match.ts": "8d4883eb536910473c098145e02dab9cb608e0785b81a3c938fc92f99b27644b",
+    "https://jsr.io/@std/assert/1.0.6/not_strict_equals.ts": "a632c008d8f193c3ce4db8255770d108c3fc78009d54a3b4927024b7cbd11aa4",
+    "https://jsr.io/@std/assert/1.0.6/object_match.ts": "aeca9c9f64359eaec21956abbcb792a21d1f342586774ce1489ef9af37174cbf",
+    "https://jsr.io/@std/assert/1.0.6/rejects.ts": "cbc4e32d920ed99ab660f493232ff8a4e304cd906cd85c0b99db9a297faadec2",
+    "https://jsr.io/@std/assert/1.0.6/strict_equals.ts": "ddda46957de2fa5e7a4f631718ab2b1647614b9dc1a0157a9e274d3d096621bc",
+    "https://jsr.io/@std/assert/1.0.6/string_includes.ts": "1ae15192f035f87c1ba57b6c1117eea3550368e5cfbc3e0c774015d2b2a53487",
+    "https://jsr.io/@std/assert/1.0.6/throws.ts": "2551d301acbb2fecbb6ac749a36b5549325eada6f29cee56f4f1a432296fe7ef",
+    "https://jsr.io/@std/assert/1.0.6/unimplemented.ts": "679e70c4b9d599d7b4ba12ff94a10fa079b52fb3f372ce4c5ef15247d467cd8f",
+    "https://jsr.io/@std/assert/1.0.6/unreachable.ts": "daa76cc23377d1b267075cdabb0c5f11a034e737b187f2bdb705c0f3e87b2382",
+    "https://jsr.io/@std/internal/1.0.4/build_message.ts": "684e3128b293cd9d10f1948957876ddf8a486e7ee31b4e3ca8455db74ae36012",
+    "https://jsr.io/@std/internal/1.0.4/diff.ts": "903a7c9ad27c957272ca7a8562a9319b68f604cc3ad35618a21c79dcfa458446",
+    "https://jsr.io/@std/internal/1.0.4/diff_str.ts": "9a1e78185aa461f59bcedd2826333872a500a2e6db1b603c9cbc51c09ce24be9",
+    "https://jsr.io/@std/internal/1.0.4/format.ts": "0b380161315f6b3ef5222847177047e01e049f4757bac5b7f7843c9ce3311eb5",
+    "https://jsr.io/@std/internal/1.0.4/styles.ts": "86159ab0f45ea55643fbe727f20daaf4670d6ace57d83dab7406f74e4486a0e6",
+    "https://jsr.io/@std/internal/1.0.4/types.ts": "606fb6fe832f6114779569659a61f02a2fa2f9b75cf7e7ee1ad4cfb176b1caf9"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:peggy@4.1"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@types/node@^22.10.2",
+        "npm:peggy@^4.1",
+        "npm:vite@^6.0.5"
+      ]
+    }
+  }
 }

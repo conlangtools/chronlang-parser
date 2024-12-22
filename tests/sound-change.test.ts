@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "jsr:@std/assert";
-import { parse } from "../mod.ts";
+import { parse } from "../src/mod.ts";
 
 Deno.test("Parse a minimal sound change", () => {
   const source = "source-name";
