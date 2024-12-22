@@ -90,6 +90,8 @@ jobs:
         env:
           TAG: ${{ needs.create-tag.outputs.tag }}
         run: yarn version --no-git-tag-version --new-version "${TAG:1}"
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
       - name: Bundle Package
         run: deno task bundle
       - name: Publish to NPM Registry
