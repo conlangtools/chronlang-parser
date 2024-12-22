@@ -9,14 +9,16 @@
 import peggy from "peggy";
 import grammar from "./grammar.ts"
 import type { Stmt } from "./ast/statements.ts";
+import type { Span } from "./ast/span.ts";
 
 const parser: peggy.Parser = peggy.generate(grammar);
 
 export * as ast from "./ast/mod.ts";
+export type SyntaxError = peggy.parser.SyntaxError;
 
 type ParseResult =
   | { ok: true; statements: readonly Stmt[] }
-  | { ok: false; error: string, detail: unknown };
+  | { ok: false; error: SyntaxError, span: Span };
 
 /**
  * Parse a string of Chronlang source code into a 
@@ -27,10 +29,10 @@ export function parse(source: string, sourceName: string): ParseResult {
     const statements = parser.parse(source, { grammarSource: sourceName });
     return { ok: true, statements };
   } catch (error) {
-    if (error instanceof Error) {
-      return { ok: false, error: error.message, detail: error };
+    if (error instanceof parser.SyntaxError) {
+      return { ok: false, error, span: error.location };
     }
-
-    return { ok: false, error: `${error}`, detail: error }
+    
+    throw error
   }
 }
